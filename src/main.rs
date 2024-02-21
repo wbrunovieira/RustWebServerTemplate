@@ -23,7 +23,7 @@ struct User {
 }
 #[derive(Serialize, Deserialize, Debug, Clone)]
 struct Database {
-    task: HashMap<u64, Task>,
+    tasks: HashMap<u64, Task>,
     users: HashMap<u64, User>,
 }
 
@@ -36,20 +36,20 @@ impl Database {
     }
 
     fn insert(&mut self, task: Task) {
-        self.tasks.insert(k: task.id, v: task);
+        self.tasks.insert(task.id, task);
     }
     fn get(&self, id: &u64) -> Option<&Task> { 
-        self.tasks.get(id);
+        self.tasks.get(id)
     }
     fn get_all(&self) -> Vec<&Task> { 
-        self.tasks.values().collect();
+        self.tasks.values().collect()
     }
-    fn delete(&self, id: &u64) { 
+    fn delete(&mut self, id: &u64) { 
         self.tasks.remove(id);
     }
 
     fn update(&mut self, task: Task) {
-        self.tasks.insert(k: task.id, v: task);
+        self.tasks.insert(task.id, task);
     }
     
     // USER DATA RELATED FUNCTIONS
@@ -75,7 +75,7 @@ impl Database {
         Ok(db)
     }
 
-} impl Database
+} 
 
 fn main() {
     println!("Hello, world!");
